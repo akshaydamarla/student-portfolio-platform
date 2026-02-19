@@ -59,10 +59,7 @@ this.jwtService = jwtService;
             return ResponseEntity.badRequest().body("Invalid credentials");
         }
 
-        String token = jwtService.generateToken(
-                user.getEmail(),
-                user.getRole().name()
-        );
+        String token = jwtService.generateToken(user);
 
         return ResponseEntity.ok(token);
     }

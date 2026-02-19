@@ -6,6 +6,7 @@ import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import AdminUsers from "./pages/AdminUsers";
 import StudentProfile from "./pages/StudentProfile";
 import StudentProjects from "./pages/StudentProjects";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
@@ -13,50 +14,30 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
+        {/* ADMIN ROUTES */}
         <Route
-          path="/admin"
           element={
             <RoleProtectedRoute allowedRole="ADMIN">
-              <AdminDashboard />
+              <Layout />
             </RoleProtectedRoute>
           }
-        />
+        >
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+        </Route>
 
+        {/* STUDENT ROUTES */}
         <Route
-          path="/student"
           element={
             <RoleProtectedRoute allowedRole="STUDENT">
-              <StudentDashboard />
+              <Layout />
             </RoleProtectedRoute>
           }
-        />
-
-      <Route
-  path="/admin/users"
-  element={
-    <RoleProtectedRoute allowedRole="ADMIN">
-      <AdminUsers />
-    </RoleProtectedRoute>
-  }
-/>
-
-<Route
-  path="/student/profile"
-  element={
-    <RoleProtectedRoute allowedRole="STUDENT">
-      <StudentProfile />
-    </RoleProtectedRoute>
-  }
-/>
-
-<Route
-  path="/student/projects"
-  element={
-    <RoleProtectedRoute allowedRole="STUDENT">
-      <StudentProjects />
-    </RoleProtectedRoute>
-  }
-/>
+        >
+          <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
+          <Route path="/student/projects" element={<StudentProjects />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

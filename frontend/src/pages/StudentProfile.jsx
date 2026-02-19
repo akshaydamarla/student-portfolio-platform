@@ -1,10 +1,16 @@
-import Layout from "../components/Layout";
+import "../styles/profile.css";
 
 function StudentProfile() {
   return (
-    <Layout>
-      <h2>My Profile 🧑</h2>
-    </Layout>
+    <div>
+      <h1>My Profile</h1>
+      <div className="profile-card">
+        <p><strong>Name:</strong> Akshay</p>
+        <p><strong>Email:</strong> akshay@test.com</p>
+        <p><strong>Role:</strong> STUDENT</p>
+        <button className="edit-btn">Edit Profile</button>
+      </div>
+    </div>
   );
 }
 

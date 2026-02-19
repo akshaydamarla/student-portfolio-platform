@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [role, setRole] = useState(null);
 
@@ -11,33 +11,25 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
-      try {
-        const decoded = jwtDecode(storedToken);
-        const currentTime = Date.now() / 1000;
+      setToken(storedToken);
 
-        if (decoded.exp < currentTime) {
-          logout();
-        } else {
-          setToken(storedToken);
-          setRole(decoded.role);
-        }
-      } catch {
-        logout();
-      }
+      const decoded = jwtDecode(storedToken);
+      setRole(decoded.role);
     }
   }, []);
 
   const login = (jwtToken) => {
-    const decoded = jwtDecode(jwtToken);
-    setToken(jwtToken);
-    setRole(decoded.role);
     localStorage.setItem("token", jwtToken);
+    setToken(jwtToken);
+
+    const decoded = jwtDecode(jwtToken);
+    setRole(decoded.role);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
-    setRole(null);
+    setRole(null);   // 🔥 VERY IMPORTANT
   };
 
   return (
@@ -45,6 +37,8 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  return useContext(AuthContext);
+}

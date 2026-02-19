@@ -1,0 +1,17 @@
+.profile-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+}
+
+.edit-btn {
+  margin-top: 15px;
+  padding: 8px 15px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
