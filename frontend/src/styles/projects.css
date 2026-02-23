@@ -1,21 +1,148 @@
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
 }
 
 .project-card {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: 0.3s;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 .project-card h3 {
-  margin: 0 0 10px 0;
+  margin: 0;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 12px;
+  object-fit: cover;
+  max-height: 160px;
+}
+
+.project-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.delete-btn {
+  flex: 1;
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-ongoing {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.approved-badge {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.rejected-badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* ================= PROJECT FORM STYLING ================= */
+
+.project-form {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  margin-bottom: 30px;
+  max-width: 650px;
+}
+
+.project-form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.project-form input,
+.project-form textarea,
+.project-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.project-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.project-form input:focus,
+.project-form textarea:focus,
+.project-form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.project-form button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.project-form button:hover {
+  background: #1e40af;
 }

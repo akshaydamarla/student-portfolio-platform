@@ -15,14 +15,21 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-// Auto logout on 401
+// Auto logout on 401 or 403
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/";
+    if (error.response) {
+      const status = error.response.status;
+
+      // Only logout on 401 (Unauthorized / expired token)
+      if (status === 401|| status === 403) {
+        localStorage.removeItem("token");
+        alert("Session expired. Please login again.");
+        window.location.href = "/";
+      }
     }
+
     return Promise.reject(error);
   }
 );

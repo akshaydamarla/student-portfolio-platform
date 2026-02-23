@@ -1,9 +1,12 @@
 import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/layout.css";
+import { useTheme } from "../context/ThemeContext";
+
 
 function Layout() {
   const { role, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,36 +21,43 @@ function Layout() {
           <h2>Portfolio</h2>
         </div>
 
-        <nav className="sidebar-nav">
-          {role === "ADMIN" && (
-            <>
-              <NavLink to="/admin" className="nav-link">
-                Admin Home
-              </NavLink>
-              <NavLink to="/admin/users" className="nav-link">
-                Manage Users
-              </NavLink>
-            </>
-          )}
+        <div className="sidebar-content">
+          <nav className="sidebar-nav">
+            {role === "ADMIN" && (
+              <>
+                <NavLink to="/admin" className="nav-link">
+                  Admin Home
+                </NavLink>
+                <NavLink to="/admin/users" className="nav-link">
+                  Manage Users
+                </NavLink>
+                <NavLink to="/admin/projects" className="nav-link">
+                  Manage Projects
+                </NavLink>
+              </>
+            )}
 
-          {role === "STUDENT" && (
-            <>
-              <NavLink to="/student" className="nav-link">
-                Student Home
-              </NavLink>
-              <NavLink to="/student/profile" className="nav-link">
-                My Profile
-              </NavLink>
-              <NavLink to="/student/projects" className="nav-link">
-                My Projects
-              </NavLink>
-            </>
-          )}
-        </nav>
+            {role === "STUDENT" && (
+              <>
+                <NavLink to="/student" className="nav-link">
+                  Student Home
+                </NavLink>
+                <NavLink to="/student/profile" className="nav-link">
+                  My Profile
+                </NavLink>
+                <NavLink to="/student/projects" className="nav-link">
+                  My Projects
+                </NavLink>
+              </>
+            )}
+          </nav>
+        </div>
 
-        <button onClick={handleLogout} className="logout-btn">
-          Logout
-        </button>
+        <div className="sidebar-footer">
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
+        </div>
       </aside>
 
       <main className="main-content">
@@ -56,7 +66,10 @@ function Layout() {
       <h3>Student Portfolio Platform</h3>
     </div>
     <div className="user-info">
-      <span>{role}</span>
+    <span>{role}</span>
+    <button className="theme-toggle" onClick={toggleTheme}>
+    {theme === "light" ? "🌙 Dark" : "☀ Light"}
+    </button>
     </div>
   </div>
 

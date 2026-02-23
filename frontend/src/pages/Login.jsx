@@ -1,31 +1,45 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import "../styles/login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [captchaToken, setCaptchaToken] = useState(null);
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+
+    if (!captchaToken) {
+      alert("Please verify captcha");
+      return;
+    }
+
     try {
       const res = await axios.post(
         "http://localhost:8080/api/auth/login",
-        { email, password }
+        {
+          email,
+          password,
+          captchaToken   // 🔥 send to backend
+        }
       );
 
       const token = res.data;
       localStorage.setItem("token", token);
 
-      // Decode only for navigation
       const payload = JSON.parse(atob(token.split(".")[1]));
       const role = payload.role;
 
       window.location.href =
-  role === "ADMIN" ? "/admin" : "/student";
+        role === "ADMIN" ? "/admin" : "/student";
+
     } catch (err) {
-      alert("Invalid Credentials");
+      alert("Invalid Credentials or Captcha Failed");
+      setCaptchaToken(null);
     }
   };
 
@@ -47,7 +61,20 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {/* GOOGLE RECAPTCHA */}
+        <div style={{ marginBottom: "15px" }}>
+          <ReCAPTCHA
+            sitekey="6Ldk33MsAAAAAKnSMybmhiIOXBcC5rjY_mV97caD"
+            onChange={(token) => setCaptchaToken(token)}
+          />
+        </div>
+
         <button onClick={handleLogin}>Login</button>
+
+        <p>
+          Don't have an account?{" "}
+          <a href="/register">Create Account</a>
+        </p>
       </div>
     </div>
   );

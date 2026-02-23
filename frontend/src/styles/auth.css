@@ -1,0 +1,98 @@
+/* Full page center */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Card */
+.auth-container form {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1e293b;
+}
+
+/* Inputs */
+.auth-container input {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Captcha text */
+.auth-container p {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* Button */
+.auth-container button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-container button:hover {
+  background: #1d4ed8;
+}
+
+/* Link below */
+.auth-link {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+.auth-switch {
+  margin-top: 15px;
+  font-size: 14px;
+  color: gray;
+}
+
+.auth-switch span {
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-switch span:hover {
+  text-decoration: underline;
+}

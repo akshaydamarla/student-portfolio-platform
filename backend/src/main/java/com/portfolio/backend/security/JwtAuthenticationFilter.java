@@ -10,9 +10,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.portfolio.backend.model.User;
-import com.portfolio.backend.repository.UserRepository;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +19,15 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserRepository userRepository;
 
-    public JwtAuthenticationFilter(JwtService jwtService,
-                                   UserRepository userRepository) {
+    public JwtAuthenticationFilter(JwtService jwtService) {
         this.jwtService = jwtService;
-        this.userRepository = userRepository;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/api/auth") || path.startsWith("/uploads");
     }
 
     @Override
@@ -35,14 +35,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
-
-        String path = request.getServletPath();
-
-        // Skip authentication endpoints
-        if (path.startsWith("/api/auth")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         final String authHeader = request.getHeader("Authorization");
 
@@ -52,18 +44,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
-        String email = jwtService.extractEmail(token);
+        try {
 
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            String email = jwtService.extractEmail(token);
+            String role = jwtService.extractRole(token).toUpperCase();
 
-            var userOptional = userRepository.findByEmail(email);
-
-            if (userOptional.isPresent()) {
-
-                User user = userOptional.get();
+            if (email != null &&
+                SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 List<SimpleGrantedAuthority> authorities = List.of(
-                        new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
+                        new SimpleGrantedAuthority("ROLE_" + role)
                 );
 
                 UsernamePasswordAuthenticationToken authToken =
@@ -79,6 +69,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
+
+        } catch(io.jsonwebtoken.ExpiredJwtException e) {
+
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token expired");
+            return;
         }
 
         filterChain.doFilter(request, response);

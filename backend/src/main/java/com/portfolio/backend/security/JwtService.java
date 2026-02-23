@@ -25,18 +25,29 @@ public class JwtService {
 
 	    return claims.getSubject();
 	}
+	public String extractRole(String token) {
+
+	    Claims claims = Jwts.parserBuilder()
+	            .setSigningKey(SECRET_KEY)
+	            .build()
+	            .parseClaimsJws(token)
+	            .getBody();
+
+	    return claims.get("role", String.class);
+	}
 
     private final SecretKey SECRET_KEY = 
         Keys.hmacShaKeyFor("mysecretkeymysecretkeymysecretkey12".getBytes());
 
-    public String generateToken(User user) {
+    public String generateToken(String email, String role) {
 
-    	return Jwts.builder()
-    	        .setSubject(user.getEmail())
-    	        .claim("role", user.getRole().name())
-    	        .setIssuedAt(new Date())
-    	        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-    	        .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
-    	        .compact();
+        return Jwts.builder()
+                .setSubject(email)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                .compact();
     }
+    
 }

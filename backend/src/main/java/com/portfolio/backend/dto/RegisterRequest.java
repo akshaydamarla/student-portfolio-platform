@@ -8,6 +8,7 @@ public class RegisterRequest {
     private String email;
     private String password;
     private Role role;
+    private String captchaToken;   // ✅ ADD THIS
 
     public String getName() {
         return name;
@@ -39,5 +40,14 @@ public class RegisterRequest {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    // ✅ NEW GETTER & SETTER
+    public String getCaptchaToken() {
+        return captchaToken;
+    }
+
+    public void setCaptchaToken(String captchaToken) {
+        this.captchaToken = captchaToken;
     }
 }

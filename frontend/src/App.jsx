@@ -7,6 +7,8 @@ import AdminUsers from "./pages/AdminUsers";
 import StudentProfile from "./pages/StudentProfile";
 import StudentProjects from "./pages/StudentProjects";
 import Layout from "./layout/Layout";
+import AdminProjects from "./pages/AdminProjects";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         >
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/projects" element={<AdminProjects />} />
         </Route>
 
         {/* STUDENT ROUTES */}
@@ -38,6 +41,7 @@ function App() {
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/projects" element={<StudentProjects />} />
         </Route>
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
