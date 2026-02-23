@@ -155,27 +155,16 @@ function StudentProjects() {
               </span>
             </p>
 
-            <div
-              style={{
-                background: "#e2e8f0",
-                borderRadius: "8px",
-                overflow: "hidden",
-                marginBottom: "10px",
-              }}
-            >
+            <div className="progress-container">
               <div
-                style={{
-                  width: `${project.progress}%`,
-                  background: "#2563eb",
-                  color: "white",
-                  textAlign: "center",
-                  fontSize: "12px",
-                  padding: "4px 0",
-                }}
-              >
-                {project.progress}%
-              </div>
+                className="progress-bar"
+                style={{ width: `${project.progress}%` }}
+              ></div>
             </div>
+
+            <p className="progress-text">
+              {project.progress}% Completed
+            </p>
 
             <p>
               <strong>Approval:</strong>{" "}
