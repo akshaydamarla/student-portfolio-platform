@@ -64,7 +64,7 @@ export default function Login() {
         {/* GOOGLE RECAPTCHA */}
         <div style={{ marginBottom: "15px" }}>
           <ReCAPTCHA
-            sitekey="6Ldk33MsAAAAAKnSMybmhiIOXBcC5rjY_mV97caD"
+            sitekey="6LclX3csAAAAANZ63m5o0XnPWNtf3hhXvvmrC8C1"
             onChange={(token) => setCaptchaToken(token)}
           />
         </div>
