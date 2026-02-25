@@ -15,7 +15,7 @@ function StudentProjects() {
 
   const fetchProjects = () => {
     axios
-      .get("http://localhost:8080/api/student/projects", {
+      .get("https://student-portfolio-platform-0fsw.onrender.com/api/student/projects", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setProjects(res.data))
@@ -38,7 +38,7 @@ function StudentProjects() {
     formData.append("image", image);
 
     axios
-      .post("http://localhost:8080/api/student/projects", formData, {
+      .post("https://student-portfolio-platform-0fsw.onrender.com/api/student/projects", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -63,7 +63,7 @@ function StudentProjects() {
 
     try {
       await axios.delete(
-        `http://localhost:8080/api/student/projects/${id}`,
+        `https://student-portfolio-platform-0fsw.onrender.com/api/student/projects/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -203,7 +203,7 @@ function StudentProjects() {
             )}
 
             <img
-              src={`http://localhost:8080${project.imageUrl}`}
+              src={`https://student-portfolio-platform-0fsw.onrender.com${project.imageUrl}`}
               alt="project"
             />
             <br />

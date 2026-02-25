@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://student-portfolio-platform-0fsw.onrender.com",
 });
 
 // Attach token to every request

@@ -20,7 +20,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        "https://student-portfolio-platform-0fsw.onrender.com/api/auth/login",
         {
           email,
           password,

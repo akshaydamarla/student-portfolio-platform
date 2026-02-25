@@ -21,7 +21,7 @@ function Register() {
     }
 
     try {
-      await axios.post("http://localhost:8080/api/auth/register", {
+      await axios.post("https://student-portfolio-platform-0fsw.onrender.com/api/auth/register", {
         name,
         email,
         password,

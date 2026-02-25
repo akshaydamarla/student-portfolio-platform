@@ -8,7 +8,7 @@ function AdminProjects() {
 
   const fetchProjects = () => {
     axios
-      .get("http://localhost:8080/api/admin/projects", {
+      .get("https://student-portfolio-platform-0fsw.onrender.com/api/admin/projects", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setProjects(res.data))
@@ -22,7 +22,7 @@ function AdminProjects() {
   const handleReview = async (id, approved, feedback) => {
     try {
       await axios.put(
-        `http://localhost:8080/api/admin/projects/${id}/review`,
+        `https://student-portfolio-platform-0fsw.onrender.com/api/admin/projects/${id}/review`,
         null,
         {
           params: { approved, feedback },
@@ -42,7 +42,7 @@ function AdminProjects() {
 
     try {
       await axios.delete(
-        `http://localhost:8080/api/admin/projects/${id}`,
+        `https://student-portfolio-platform-0fsw.onrender.com/api/admin/projects/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -159,7 +159,7 @@ function AdminProjects() {
 
             {project.imageUrl && (
               <img
-                src={`http://localhost:8080${project.imageUrl}`}
+                src={`https://student-portfolio-platform-0fsw.onrender.com${project.imageUrl}`}
                 alt="project"
               />
             )}
