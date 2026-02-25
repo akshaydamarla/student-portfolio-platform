@@ -138,21 +138,28 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+/* 🔥 UPDATED SUBMIT BUTTON ONLY */
 .project-form button {
   margin-top: 20px;
   padding: 12px;
   width: 100%;
-  background: var(--accent-color);
-  color: white;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
 }
 
 .project-form button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+}
+
+.project-form button:active {
+  transform: scale(0.98);
 }
 
 /* ================= PROGRESS BAR ================= */
@@ -177,7 +184,6 @@
   animation: growProgress 1s ease forwards;
 }
 
-/* Animation */
 @keyframes growProgress {
   from {
     width: 0;
