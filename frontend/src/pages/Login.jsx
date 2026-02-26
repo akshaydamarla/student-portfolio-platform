@@ -8,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,6 +18,8 @@ export default function Login() {
       alert("Please verify captcha");
       return;
     }
+
+    setLoading(true);
 
     try {
       const res = await axios.post(
@@ -40,6 +43,9 @@ export default function Login() {
     } catch (err) {
       alert("Invalid Credentials or Captcha Failed");
       setCaptchaToken(null);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,7 +75,13 @@ export default function Login() {
           />
         </div>
 
-        <button onClick={handleLogin}>Login</button>
+        <button
+          onClick={handleLogin}
+          disabled={loading}
+          className="auth-btn"
+        >
+          {loading ? <span className="spinner"></span> : "Login"}
+        </button>
 
         <p>
           Don't have an account?{" "}

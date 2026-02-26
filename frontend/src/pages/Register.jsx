@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import "../styles/auth.css";
@@ -11,6 +11,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,8 +21,10 @@ function Register() {
       return;
     }
 
+    setLoading(true);
+
     try {
-      await axios.post("https://student-portfolio-platform-0fsw.onrender.com/api/auth/register", {
+      await axios.post("/api/auth/register", {
         name,
         email,
         password,
@@ -33,6 +36,9 @@ function Register() {
       navigate("/");   // 👈 go to login
     } catch (err) {
       alert("Registration failed");
+      setCaptchaToken(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,7 +78,9 @@ function Register() {
           />
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading} className="auth-btn">
+          {loading ? <span className="spinner"></span> : "Register"}
+        </button>
 
         {/* NEW LOGIN BUTTON */}
         <p className="auth-switch">
