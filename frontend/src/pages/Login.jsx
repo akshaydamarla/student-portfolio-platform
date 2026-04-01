@@ -87,6 +87,12 @@ export default function Login() {
           Don't have an account?{" "}
           <a href="/register">Create Account</a>
         </p>
+        <p className="auth-switch">
+  Forgot Password?{" "}
+  <span onClick={() => (window.location.href = "/forgot-password")}>
+    Reset here
+  </span>
+</p>
       </div>
     </div>
   );

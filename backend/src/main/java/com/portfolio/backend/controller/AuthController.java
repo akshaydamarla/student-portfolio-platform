@@ -1,19 +1,29 @@
 package com.portfolio.backend.controller;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.portfolio.backend.dto.LoginRequest;
 import com.portfolio.backend.dto.RegisterRequest;
 import com.portfolio.backend.model.User;
 import com.portfolio.backend.repository.UserRepository;
 import com.portfolio.backend.security.JwtService;
+import com.portfolio.backend.service.OtpService;
+import com.portfolio.backend.service.EmailService;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,17 +32,24 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final OtpService otpService;
+    private final EmailService emailService;
+
+    public AuthController(UserRepository userRepository,
+                          PasswordEncoder passwordEncoder,
+                          JwtService jwtService,
+                          OtpService otpService,
+                          EmailService emailService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.otpService = otpService;
+        this.emailService = emailService;
+    }
 
     @Value("${recaptcha.secret}")
     private String recaptchaSecret;
 
-    public AuthController(UserRepository userRepository,
-                          PasswordEncoder passwordEncoder,
-                          JwtService jwtService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-    }
 
     // ================= REGISTER =================
     @PostMapping("/register")
@@ -84,6 +101,39 @@ public class AuthController {
 
         return ResponseEntity.ok(token);
     }
+    
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> sendOtp(@RequestParam String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String otp = otpService.generateOtp(email);
+        emailService.sendOtp(email, otp);
+
+        return ResponseEntity.ok("OTP sent to email");
+    }
+    
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(
+            @RequestParam String email,
+            @RequestParam String otp,
+            @RequestParam String newPassword) {
+
+        if (!otpService.verifyOtp(email, otp)) {
+            return ResponseEntity.badRequest().body("Invalid OTP");
+        }
+
+        User user = userRepository.findByEmail(email).orElseThrow();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        otpService.clearOtp(email);
+
+        return ResponseEntity.ok("Password reset successful");
+    }
+    
+    
 
     // ================= CAPTCHA VALIDATION =================
     private boolean validateCaptcha(String token) {

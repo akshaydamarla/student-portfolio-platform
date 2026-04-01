@@ -9,6 +9,7 @@ import StudentProjects from "./pages/StudentProjects";
 import Layout from "./layout/Layout";
 import AdminProjects from "./pages/AdminProjects";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         </Route>
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Route path="/forgot-password" element={<ForgotPassword />} />
     </BrowserRouter>
   );
 }
