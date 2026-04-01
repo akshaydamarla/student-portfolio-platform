@@ -43,8 +43,8 @@ function App() {
           <Route path="/student/projects" element={<StudentProjects />} />
         </Route>
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
-      <Route path="/forgot-password" element={<ForgotPassword />} />
     </BrowserRouter>
   );
 }
