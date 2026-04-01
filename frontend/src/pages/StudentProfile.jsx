@@ -33,7 +33,7 @@ function StudentProfile() {
         },
       });
 
-      alert("Profile updated successfully");
+      toast.success("Profile updated successfully");
       setEditMode(false);
       setPassword("");
 
@@ -42,7 +42,7 @@ function StudentProfile() {
       setProfile(res.data);
 
     } catch (error) {
-      alert("Update failed");
+      toast.error("Update failed");
     }
   };
 

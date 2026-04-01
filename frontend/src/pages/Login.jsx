@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "react-toastify";
 import "../styles/login.css";
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
   const handleLogin = async () => {
 
     if (!captchaToken) {
-      alert("Please verify captcha");
+      toast.warning("Please verify captcha");
       return;
     }
 
@@ -41,7 +42,7 @@ export default function Login() {
         role === "ADMIN" ? "/admin" : "/student";
 
     } catch (err) {
-      alert("Invalid Credentials or Captcha Failed");
+      toast.error("Invalid Credentials or Captcha Failed");
       setCaptchaToken(null);
       setLoading(false);
     } finally {

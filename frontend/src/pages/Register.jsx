@@ -17,7 +17,7 @@ function Register() {
     e.preventDefault();
 
     if (!captchaToken) {
-      alert("Please verify captcha");
+      toast.warning("Please verify captcha");
       return;
     }
 
@@ -32,10 +32,10 @@ function Register() {
         captchaToken
       });
 
-      alert("Registration successful!");
+      toast.success("Registration successful!");
       navigate("/");   // 👈 go to login
     } catch (err) {
-      alert("Registration failed");
+      toast.error("Registration failed");
       setCaptchaToken(null);
     } finally {
       setLoading(false);

@@ -33,7 +33,7 @@ function AdminProjects() {
       fetchProjects();
     } catch (error) {
       console.error(error);
-      alert("Review failed");
+      toast.error("Review failed");
     }
   };
 
@@ -50,7 +50,7 @@ function AdminProjects() {
       fetchProjects();
     } catch (error) {
       console.error(error);
-      alert("Delete failed");
+      toast.error("Delete failed");
     }
   };
 

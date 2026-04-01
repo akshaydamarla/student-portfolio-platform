@@ -16,10 +16,10 @@ export default function ForgotPassword() {
       await axios.post("/api/auth/forgot-password", null, {
         params: { email },
       });
-      alert("OTP sent to your email");
+      toast.success("OTP sent to your email");
       setStep(2);
     } catch (err) {
-      alert("Failed to send OTP");
+      toast.error("Failed to send OTP");
     } finally {
       setLoading(false);
     }
@@ -32,10 +32,10 @@ export default function ForgotPassword() {
       await axios.post("/api/auth/reset-password", null, {
         params: { email, otp, newPassword },
       });
-      alert("Password reset successful. Please login.");
+      toast.success("Password reset successful. Please login.");
       window.location.href = "/";
     } catch (err) {
-      alert("Invalid OTP or failed");
+      toast.error("Invalid OTP or failed");
     } finally {
       setLoading(false);
     }

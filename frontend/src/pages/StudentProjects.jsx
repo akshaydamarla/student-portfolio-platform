@@ -74,7 +74,7 @@ function StudentProjects() {
       fetchProjects();
     } catch (error) {
       console.error(error);
-      alert("Failed to delete project");
+      toast.error("Failed to delete project");
     }
   };
 

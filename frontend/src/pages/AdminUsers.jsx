@@ -21,7 +21,7 @@ function AdminUsers() {
 
   const handleDelete = async (id, role) => {
     if (role === "ADMIN") {
-      alert("Admins cannot delete other admins");
+      toast.error("Admins cannot delete other admins");
       return;
     }
     if (!window.confirm("Are you sure you want to delete this user?")) return;
@@ -31,7 +31,7 @@ function AdminUsers() {
       fetchUsers();
     } catch (error) {
       console.error("Delete failed", error);
-      alert("Delete failed");
+      toast.error("Delete failed");
     }
   };
 
