@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../api/axios";
+import { toast } from "react-toastify";
 import "../styles/auth.css";
 
 export default function ForgotPassword() {
