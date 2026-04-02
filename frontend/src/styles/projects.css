@@ -36,7 +36,7 @@
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 36px var(--shadow-color);
   border-color: rgba(59, 130, 246, 0.3);
 }
 
@@ -104,6 +104,11 @@
   object-fit: cover;
   max-height: 160px;
   border: 1px solid var(--border-color);
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.04);
 }
 
 /* ================= STATUS BADGES ================= */
@@ -209,6 +214,7 @@
   border-radius: 20px;
   width: 0;
   animation: growProgress 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .progress-bar.green  { background: linear-gradient(90deg, #22c55e, #4ade80); }
@@ -249,6 +255,7 @@
 .delete-btn:hover {
   background: rgba(239, 68, 68, 0.2);
   transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
 }
 
 .view-btn {
@@ -273,6 +280,7 @@
 .view-btn:hover {
   background: rgba(59, 130, 246, 0.2);
   transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
 }
 
 .feedback-btn {
@@ -297,13 +305,14 @@
 .feedback-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.38);
+  filter: brightness(1.05);
 }
 
 /* ================= PROJECT FORM ================= */
 .project-form {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 28px;
+  padding: 32px;
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 24px var(--shadow-color);
   margin-bottom: 28px;
@@ -451,6 +460,7 @@
 .project-form button[type="submit"]:active,
 .project-form .submit-btn:active {
   transform: scale(0.98);
+  box-shadow: none;
 }
 
 /* ================= MILESTONE TRACKER ================= */
@@ -518,3 +528,32 @@
 
 .milestone-date.done   { color: #4ade80; }
 .milestone-date.active { color: var(--accent-light); }
+
+/* ================= MICRO INTERACTIONS ================= */
+.project-card {
+  will-change: transform;
+}
+
+.project-form input:hover,
+.project-form textarea:hover,
+.project-form select:hover {
+  border-color: var(--accent-light);
+}
+
+.project-form input:focus,
+.project-form textarea:focus,
+.project-form select:focus {
+  transform: scale(1.01);
+}
+
+.upload-area {
+  position: relative;
+}
+
+.upload-area::after {
+  content: "Click or drag to upload";
+  font-size: 11px;
+  color: var(--text-hint);
+  display: block;
+  margin-top: 6px;
+}

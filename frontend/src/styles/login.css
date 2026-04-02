@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: var(--font-main, 'Plus Jakarta Sans', 'Segoe UI', sans-serif);
-  background: #0f172a;
+  background: var(--bg-main);
 }
 
 .login-container {
@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0f172a;
+  background: var(--bg-main);
   position: relative;
   overflow: hidden;
 }
@@ -40,12 +40,13 @@ body {
 
 /* ================= LOGIN CARD ================= */
 .login-card {
-  background: #1e293b;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   padding: 44px 40px;
   width: 400px;
   border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 40px var(--shadow-color);
+  backdrop-filter: blur(6px);
   position: relative;
   z-index: 1;
   animation: loginReveal 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -88,13 +89,13 @@ body {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 24px;
   font-weight: 300;
-  color: #f1f5f9;
+  color: var(--text-main);
   margin-bottom: 6px;
   text-align: center;
 }
 
 .subtitle {
-  color: #64748b;
+  color: var(--text-secondary);
   font-size: 13px;
   text-align: center;
   margin-bottom: 0;
@@ -104,7 +105,7 @@ body {
 .role-tabs {
   display: flex;
   gap: 4px;
-  background: #0f172a;
+  background: var(--bg-elevated);
   border-radius: 10px;
   padding: 4px;
   margin-bottom: 22px;
@@ -116,7 +117,7 @@ body {
   border-radius: 7px;
   border: none;
   background: transparent;
-  color: #64748b;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
@@ -135,7 +136,7 @@ body {
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-hint);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -146,9 +147,9 @@ body {
   padding: 11px 14px;
   margin-bottom: 14px;
   border-radius: 9px;
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  background: #0f172a;
-  color: #f1f5f9;
+  border: 1px solid var(--border-color);
+  background: var(--bg-elevated);
+  color: var(--text-main);
   font-size: 14px;
   font-family: inherit;
   transition: all 0.25s ease;
@@ -156,14 +157,14 @@ body {
 }
 
 .login-card input::placeholder {
-  color: #475569;
+  color: var(--text-hint);
 }
 
 .login-card input:focus {
   border-color: #3b82f6;
   outline: none;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-  background: #141f35;
+  background: var(--bg-card);
 }
 
 /* ================= CAPTCHA ================= */
@@ -176,8 +177,8 @@ body {
 
 .captcha-display {
   flex: 1;
-  background: #0f172a;
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
   border-radius: 9px;
   padding: 9px 14px;
   font-size: 17px;
@@ -243,6 +244,7 @@ body {
   align-items: center;
   gap: 8px;
   box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+  letter-spacing: 0.3px;
 }
 
 .login-card button:hover:not(:disabled),
@@ -268,7 +270,7 @@ body {
   display: block;
   text-align: right;
   font-size: 12px;
-  color: #60a5fa;
+  color: var(--accent-color);
   text-decoration: none;
   margin-bottom: 16px;
   margin-top: -8px;
@@ -307,11 +309,11 @@ body {
   margin-top: 18px;
   text-align: center;
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .auth-switch span {
-  color: #60a5fa;
+  color: var(--accent-color);
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s;
@@ -325,7 +327,7 @@ body {
 /* ================= ERROR MESSAGE ================= */
 .login-error {
   background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   color: #f87171;
   padding: 10px 14px;
   border-radius: 8px;

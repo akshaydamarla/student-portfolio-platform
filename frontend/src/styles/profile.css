@@ -328,3 +328,68 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ================= CONTRAST + DARK MODE FIX ================= */
+
+/* Ensure card is always readable */
+.profile-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* Fix white-on-white issue */
+.profile-card input,
+.profile-input {
+  background: var(--bg-elevated);
+  color: var(--text-main);
+}
+
+/* Improve placeholder visibility */
+.profile-card input::placeholder {
+  color: var(--text-hint);
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .profile-card {
+  background: #0f172a;
+  border-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .profile-card input {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ================= BUTTON POLISH ================= */
+
+.save-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+}
+
+.save-btn:hover {
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+}
+
+.cancel-btn:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* ================= MICRO INTERACTIONS ================= */
+
+.profile-card input:hover {
+  border-color: var(--accent-light);
+}
+
+.profile-card input:focus {
+  transform: scale(1.01);
+}
+
+/* ================= SMOOTH CARD HOVER ================= */
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}

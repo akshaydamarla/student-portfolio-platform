@@ -48,6 +48,22 @@
   --color-purple:  #c4b5fd;
 }
 
+/* ================= LIGHT THEME ================= */
+[data-theme="light"] {
+  --bg-main: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-elevated: #f8fafc;
+  --bg-topbar: #ffffff;
+  --bg-card2: #ffffff;
+
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-hint: #94a3b8;
+
+  --border-color: rgba(15, 23, 42, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
 /* ================= GLOBAL RESET ================= */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -113,19 +129,21 @@ a:hover {
 /* ================= BUTTONS (global reset) ================= */
 button {
   border-radius: var(--radius-sm);
-  border: 1px solid transparent;
-  padding: 0.55em 1.1em;
+  border: 1px solid var(--border-color);
+  padding: 0.6em 1.2em;
   font-size: 14px;
   font-weight: 500;
   font-family: var(--font-main);
   cursor: pointer;
   transition: var(--transition);
-  outline: none;
+  background: var(--bg-elevated);
+  color: var(--text-main);
 }
 
-button:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
+button:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: transparent;
 }
 
 /* ================= FORM ELEMENTS ================= */
@@ -133,6 +151,16 @@ input, textarea, select {
   font-family: var(--font-main);
   font-size: 14px;
   color: var(--text-main);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  outline: none;
 }
 
 /* ================= IMAGES ================= */
@@ -245,4 +273,17 @@ ul, ol {
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+/* ================= CARD UTILITY ================= */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 0 6px 18px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }

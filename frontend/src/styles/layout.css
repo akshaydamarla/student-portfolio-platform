@@ -25,6 +25,11 @@
   --transition: all 0.25s ease;
 }
 
+/* ================= LIGHT THEME (layout overrides) ================= */
+[data-theme="light"] {
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
 /* ================= RESET ================= */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -45,7 +50,7 @@
 .sidebar {
   width: 230px;
   background: var(--sidebar-bg);
-  color: white;
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -141,13 +146,13 @@
 }
 
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(59, 130, 246, 0.08);
   color: var(--text-main);
 }
 
 .nav-link.active {
   background: rgba(59, 130, 246, 0.15);
-  color: var(--accent-light);
+  color: var(--accent-color);
 }
 
 .nav-link.active::before {
@@ -231,7 +236,7 @@
   padding: 9px 12px;
   border: none;
   background: rgba(239, 68, 68, 0.12);
-  color: #f87171;
+  color: #ef4444;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
@@ -246,8 +251,8 @@
 }
 
 .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.22);
-  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.2);
+  color: #dc2626;
 }
 
 /* ================= MAIN CONTENT ================= */
@@ -261,7 +266,7 @@
 
 /* ================= TOPBAR ================= */
 .topbar {
-  background: rgba(10, 22, 40, 0.85);
+  background: var(--bg-topbar);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 18px 30px;
@@ -318,7 +323,7 @@
 }
 
 .topbar-search input::placeholder {
-  color: var(--text-secondary);
+  color: var(--text-hint);
 }
 
 .user-info {
@@ -450,6 +455,7 @@
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  color: var(--text-main);
 }
 
 .dashboard-card:hover {
@@ -498,6 +504,7 @@
   border-radius: var(--radius-lg);
   padding: 20px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  color: var(--text-main);
 }
 
 /* ================= TWO / THREE COLUMN LAYOUTS ================= */
@@ -527,3 +534,7 @@
   .three-col { grid-template-columns: 1fr; }
   .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Ensure links readable in light mode */
+a { color: var(--accent-color); }
+a:hover { opacity: 0.9; }
