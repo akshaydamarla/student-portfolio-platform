@@ -14,8 +14,22 @@ public class EmailService {
     public void sendOtp(String toEmail, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
-        message.setSubject("Password Reset OTP");
-        message.setText("Your OTP is: " + otp);
+        message.setSubject("🔐 Password Reset Request - Student Portfolio Platform");
+        message.setText(
+                "Dear User,\n\n" +
+                "We received a request to reset your password for your Student Portfolio account.\n\n" +
+
+                "🔑 Your One-Time Password (OTP) is: " + otp + "\n\n" +
+
+                "This OTP is valid for a limited time. Please do not share it with anyone for security reasons.\n\n" +
+
+                "If you did not request a password reset, please ignore this email or contact support.\n\n" +
+
+                "Best regards,\n" +
+                "Student Portfolio Platform Team\n" +
+                "-----------------------------\n" +
+                "This is an automated email. Please do not reply."
+            );
 
         mailSender.send(message);
     }
