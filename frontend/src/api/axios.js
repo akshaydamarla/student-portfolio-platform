@@ -23,7 +23,7 @@ instance.interceptors.response.use(
       const status = error.response.status;
 
       // Only logout on 401 (Unauthorized / expired token)
-      if (status === 401|| status === 403) {
+      if (status === 401) {
         localStorage.removeItem("token");
         alert("Session expired. Please login again.");
         window.location.href = "/";
