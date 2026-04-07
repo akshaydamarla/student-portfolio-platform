@@ -26,7 +26,7 @@ public class EmailService {
 
             String body = """
             {
-              "sender": { "email": "your-email@gmail.com", "name": "Student Portfolio" },
+              "sender": { "email": "akshaydamarla1@gmail.com", "name": "Student Portfolio" },
               "to": [{ "email": "%s" }],
               "subject": "Password Reset OTP",
               "htmlContent": "<h2>Password Reset</h2><p>Your OTP is:</p><h1 style='color:#2563eb;'>%s</h1><p>This OTP is valid for 5 minutes.</p>"
