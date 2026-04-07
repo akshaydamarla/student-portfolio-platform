@@ -1,39 +1,47 @@
 package com.portfolio.backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
-    @Async
+    @Value("${brevo.api.key}")
+    private String apiKey;
+
     public void sendOtp(String toEmail, String otp) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        try {
+            URL url = new URL("https://api.brevo.com/v3/smtp/email");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        message.setTo(toEmail);
-        message.setSubject("🔐 Password Reset Request - Student Portfolio Platform");
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("accept", "application/json");
+            conn.setRequestProperty("api-key", apiKey);
+            conn.setRequestProperty("content-type", "application/json");
+            conn.setDoOutput(true);
 
-        message.setText(
-            "Dear User,\n\n" +
-            "We received a request to reset your password for your Student Portfolio account.\n\n" +
+            String body = """
+            {
+              "sender": { "email": "your-email@gmail.com", "name": "Student Portfolio" },
+              "to": [{ "email": "%s" }],
+              "subject": "Password Reset OTP",
+              "htmlContent": "<h2>Password Reset</h2><p>Your OTP is:</p><h1 style='color:#2563eb;'>%s</h1><p>This OTP is valid for 5 minutes.</p>"
+            }
+            """.formatted(toEmail, otp);
 
-            "🔑 Your One-Time Password (OTP) is: " + otp + "\n\n" +
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(body.getBytes());
+            }
 
-            "This OTP is valid for a limited time. Please do not share it with anyone for security reasons.\n\n" +
+            int responseCode = conn.getResponseCode();
+            System.out.println("Email sent: " + responseCode);
 
-            "If you did not request a password reset, please ignore this email or contact support.\n\n" +
-
-            "Best regards,\n" +
-            "Student Portfolio Platform Team\n" +
-            "-----------------------------\n" +
-            "This is an automated email. Please do not reply."
-        );
-
-        mailSender.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
