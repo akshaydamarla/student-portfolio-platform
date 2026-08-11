@@ -1,0 +1,72 @@
+.profile-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  max-width: 500px;
+  margin-top: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.profile-card label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 15px;
+  color: var(--text-secondary);
+}
+
+.profile-card input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.profile-card input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.edit-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+}
+
+.edit-btn:active {
+  transform: scale(0.98);
+}
+
+.cancel-btn {
+  padding: 12px 20px;
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: rgba(148, 163, 184, 0.25);
+}
